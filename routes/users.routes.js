@@ -1,8 +1,3 @@
-// .populate in users.routes are causing error in the front end
-// Objects are not valid as a React child
-// .populate in auth.routes are working fine
-// why??? only god knows....
-
 const express = require("express");
 const User = require("../models/User.model");
 const router = express.Router();

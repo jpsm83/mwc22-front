@@ -1,9 +1,4 @@
-// .populate in recipes.routes are causing error in the front end
-// Objects are not valid as a React child
-// .populate in auth.routes are working fine
-// why??? only god knows...
-
-// authentication routes for User.model - login, signup, logout, edit, loggedin
+// authentication routes for User.model - login, signup, logout, edit, loggedin, delete
 
 const express = require("express");
 const passport = require("passport");
@@ -48,7 +43,7 @@ router.post("/signup", (req, res, next) => {
       password: hashPass,
     })
       .then((newUser) => {
-        // Passport req.login permite iniciar sesión tras crear el usuario
+        // Passport req.login allow us to begging session after create a user
         req.login(newUser, (error) => {
           if (error) {
             // error code 500 - internal server error
@@ -125,7 +120,7 @@ router.put("/edit-user", uploader.single("photo"), (req, res, next) => {
 
   User.findOneAndUpdate(
     { _id: req.user.id },
-    // { ...req.body, photo: req.file ? req.file.path : req.user.photo },
+    { ...req.body, photo: req.file ? req.file.path : req.user.photo },
     {
       username,
       firstname,
@@ -161,7 +156,7 @@ router.delete("/:id", (req, res, next) => {
   const userId = req.user.id;
 
   if (id === userId) {
-    // find a user and let only the owner of it delete it using req.user.id
+    // find a user and let only hinself/herself delete its profile using req.user.id
     User.findOneAndRemove({ _id: id })
       .then(() => {
         return res.status(200).json({ message: "User deleted!" });

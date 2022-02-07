@@ -3,7 +3,7 @@
 // from one domain to resources belonging to another domain
 
 const cors = require("cors");
-require('dotenv').config();
+require("dotenv").config();
 
 module.exports = (app) => {
   app.use(
@@ -13,7 +13,7 @@ module.exports = (app) => {
       origin: [
         process.env.PUBLIC_DOMAIN,
         // must setup coors to alow your production webpage to acess information
-        "https://my-recipes-library-app.herokuapp.com"
+        "https://my-recipes-library-app.herokuapp.com",
       ],
     })
   );

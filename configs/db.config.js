@@ -1,6 +1,6 @@
 // mongoose is a mongodb library that help create models easyer and faster
 const mongoose = require("mongoose");
-require('dotenv').config();
+require("dotenv").config();
 
 mongoose
   .connect(`${process.env.MONGODB_URI}`, {
