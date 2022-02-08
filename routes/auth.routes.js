@@ -91,7 +91,8 @@ router.post("/logout", (req, res, next) => {
 });
 
 // cloudnary router for upload photo???
-router.put("/:id", uploader.single("photo"), (req, res, next) => {
+router.put("/:id", (req, res, next) => {
+// router.put("/:id", uploader.single("photo"), (req, res, next) => {
   const { id } = req.params;
   const {
     username,
@@ -120,7 +121,8 @@ router.put("/:id", uploader.single("photo"), (req, res, next) => {
 
   User.findOneAndUpdate(
     { _id: id },
-    { ...req.body, password: hashPass, photo: req.file ? req.file.path : req.user.photo },
+    { ...req.body, password: hashPass },
+    // { ...req.body, password: hashPass, photo: req.file ? req.file.path : req.user.photo },
     { new: true }
   )
     .then((user) => res.status(200).json(user))
