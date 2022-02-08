@@ -120,11 +120,7 @@ router.put("/:id", uploader.single("photo"), (req, res, next) => {
 
   User.findOneAndUpdate(
     { _id: id },
-    {
-      ...req.body,
-      password: hashPass,
-      photo: req.file ? req.file.path : req.user.photo,
-    },
+    { ...req.body, password: hashPass, photo: req.file ? req.file.path : req.user.photo },
     { new: true }
   )
     .then((user) => res.status(200).json(user))
