@@ -73,7 +73,6 @@ router.post("/login", (req, res, next) => {
       if (error) {
         return res.status(500).json(error);
       }
-
       return res.status(200).json(theUser);
     });
   })(
@@ -92,7 +91,8 @@ router.post("/logout", (req, res, next) => {
 });
 
 // cloudnary router for upload photo???
-router.put("/edit-user", uploader.single("photo"), (req, res, next) => {
+router.put("/:id", uploader.single("photo"), (req, res, next) => {
+  const { id } = req.params;
   const {
     username,
     firstname,
@@ -119,21 +119,11 @@ router.put("/edit-user", uploader.single("photo"), (req, res, next) => {
   const hashPass = bcrypt.hashSync(password, salt);
 
   User.findOneAndUpdate(
-    { _id: req.user.id },
-    { ...req.body, photo: req.file ? req.file.path : req.user.photo },
+    { _id: id },
     {
-      username,
-      firstname,
-      lastname,
-      experience,
-      field,
-      skills,
-      description,
-      country,
-      city,
-      email,
+      ...req.body,
       password: hashPass,
-      photo,
+      photo: req.file ? req.file.path : req.user.photo,
     },
     { new: true }
   )

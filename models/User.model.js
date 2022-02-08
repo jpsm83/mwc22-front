@@ -4,9 +4,9 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema(
   {
-    username: { type: String, required: true },
-    firstname: { type: String },
-    lastname: { type: String },
+    username: { type: String, maxlength: 50, required: true },
+    firstname: { type: String, maxlength: 50 },
+    lastname: { type: String, maxlength: 50 },
     password: { type: String, required: true, minlength: 5 },
     experience: { type: Number },
     field: { type: String },
@@ -25,9 +25,8 @@ const userSchema = new Schema(
       type: String,
       default:
         "https://img.favpng.com/8/19/8/united-states-avatar-organization-information-png-favpng-J9DvUE98TmbHSUqsmAgu3FpGw.jpg",
-      maxlength: 300,
     },
-    description: { type: String, maxlength: 2000 },
+    description: { type: String, maxlength: 3000 },
     country: { type: String },
     city: { type: String },
   },
