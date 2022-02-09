@@ -141,19 +141,14 @@ router.get("/isLoggedin", (req, res, next) => {
 
 router.delete("/:id", (req, res, next) => {
   const { id } = req.params;
-  const userId = req.user.id;
+  // const userId = req.user.id;
 
-  if (id === userId) {
     // find a user and let only hinself/herself delete its profile using req.user.id
     User.findOneAndRemove({ _id: id })
       .then(() => {
         return res.status(200).json({ message: "User deleted!" });
       })
       .catch((err) => res.status(500).json(err));
-  } else {
-    // error 403 - forbbiden
-    return res.status(403).json({ message: "Forbbiden" });
-  }
 });
 
 module.exports = router;
