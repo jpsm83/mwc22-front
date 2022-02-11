@@ -11,6 +11,7 @@
 # production
 /build
 
+# Environment Variables should NEVER be published
 # misc
 .env
 .DS_Store

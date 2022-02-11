@@ -14,7 +14,7 @@ const storage = new CloudinaryStorage({
   cloudinary,
   params: {
     folder: "mwc22",
-    allowed_formats: ["png", "jpg"],
+    allowed_formats: ["png", "jpg", "jpeg"],
   },
 });
 
