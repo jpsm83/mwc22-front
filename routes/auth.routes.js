@@ -99,7 +99,7 @@ router.put("/:id", (req, res, next) => {
     firstname,
     lastname,
     experience,
-    field,
+    fields,
     skills,
     description,
     country,

@@ -9,7 +9,7 @@ const userSchema = new Schema(
     lastname: { type: String, maxlength: 50 },
     password: { type: String, required: true, minlength: 5 },
     experience: { type: Number },
-    field: { type: String },
+    fields: { type: String },
     skills: { type: String, maxlength: 3000 },
     email: {
       type: String,
