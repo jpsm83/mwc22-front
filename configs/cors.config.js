@@ -11,7 +11,7 @@ module.exports = (app) => {
       // credentials=true recive a cookie from the front (client) to know with user is in session
       credentials: true,
       origin: [
-        // process.env.PUBLIC_DOMAIN,
+        process.env.PUBLIC_DOMAIN,
         // must setup coors to alow your production webpage to acess information
         "https://mwc22.herokuapp.com/",
       ],
