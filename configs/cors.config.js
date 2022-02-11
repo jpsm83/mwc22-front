@@ -13,7 +13,7 @@ module.exports = (app) => {
       origin: [
         process.env.PUBLIC_DOMAIN,
         // must setup coors to alow your production webpage to acess information
-        "https://my-recipes-library-app.herokuapp.com",
+        "https://mwc22.vercel.app/",
       ],
     })
   );
