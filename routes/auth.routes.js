@@ -7,7 +7,6 @@ const User = require("../models/User.model");
 
 // Bcrypt config to encrypt passwords
 const bcrypt = require("bcryptjs");
-const uploader = require("../configs/cloudinary.config");
 const bcryptSalt = 10;
 
 router.post("/signup", (req, res, next) => {
@@ -90,9 +89,7 @@ router.post("/logout", (req, res, next) => {
   return res.status(200).json({ message: "Log out success!" });
 });
 
-// cloudnary router for upload photo???
-router.put("/:id", (req, res, next) => {
-// router.put("/:id", uploader.single("photo"), (req, res, next) => {
+router.put("/edit-user/:id", (req, res, next) => {
   const { id } = req.params;
   const {
     username,
@@ -108,6 +105,7 @@ router.put("/:id", (req, res, next) => {
     password,
     photo,
   } = req.body;
+
   // validators have to be equal to validators from frontend
   if (password.length < 5) {
     // error 400 - bad request
@@ -122,7 +120,6 @@ router.put("/:id", (req, res, next) => {
   User.findOneAndUpdate(
     { _id: id },
     { ...req.body, password: hashPass },
-    // { ...req.body, password: hashPass, photo: req.file ? req.file.path : req.user.photo },
     { new: true }
   )
     .then((user) => res.status(200).json(user))
@@ -139,16 +136,15 @@ router.get("/isLoggedin", (req, res, next) => {
   }
 });
 
-router.delete("/:id", (req, res, next) => {
+router.delete("/delete/:id", (req, res, next) => {
   const { id } = req.params;
-  // const userId = req.user.id;
 
-    // find a user and let only hinself/herself delete its profile using req.user.id
-    User.findOneAndRemove({ _id: id })
-      .then(() => {
-        return res.status(200).json({ message: "User deleted!" });
-      })
-      .catch((err) => res.status(500).json(err));
+  // find a user and let only hinself/herself delete its profile using req.user.id
+  User.findOneAndRemove({ _id: id })
+    .then(() => {
+      return res.status(200).json({ message: "User deleted!" });
+    })
+    .catch((err) => res.status(500).json(err));
 });
 
 module.exports = router;
